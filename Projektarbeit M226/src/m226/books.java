@@ -7,4 +7,5 @@ public class books {
 	int pages;
 	boolean lent;
 	
+	
 }
