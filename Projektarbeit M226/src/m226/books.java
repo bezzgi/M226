@@ -1,6 +1,6 @@
 package m226;
 
-public class books {
+public class books implements InterfaceBooks{
 	
 	String title;
 	String author;
@@ -31,5 +31,26 @@ public class books {
 	}
 	public Boolean getLent() {
 		return lent;
+	}
+	
+	public void ausleihen() {
+
+		
+	}
+	
+	public void zurückgeben() {
+
+		
+		
+	}
+
+	public void buchErstellen() {
+
+		
+	}
+	
+	public void buchLöschen() {
+
+		
 	}
 }
