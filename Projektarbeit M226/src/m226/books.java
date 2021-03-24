@@ -7,7 +7,7 @@ public class books {
 	int pages;
 	boolean lent;
 	
-	//Setter und Getter für alle Variablen
+	//Setter und Getter fÃ¼r alle Variablen
 	public void setAuthor(String author) {
 		this.author = author;
 	}
