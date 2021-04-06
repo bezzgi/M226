@@ -110,8 +110,6 @@ public class gui {
 		
 		Combo combo = new Combo(shell, SWT.READ_ONLY);
 		combo.setBounds(21, 176, 450, 28);
-		
-		//text, da push nicht funkioniert hat.
 
 	}
 }
