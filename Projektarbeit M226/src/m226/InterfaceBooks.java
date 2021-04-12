@@ -2,12 +2,12 @@ package m226;
 
 public interface InterfaceBooks{
 	
-	public void ausleihen();
+	public void lend();
 	
-	public void zurückgeben();
+	public void giveBack();
 	
-	public void buchErstellen();
+	public void createBook(books book);
 	
-	public void buchLöschen();
+	public void deleteBook();
 
 }

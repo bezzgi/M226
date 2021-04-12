@@ -3,18 +3,21 @@ package m226;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.wb.swt.SWTResourceManager;
-import org.eclipse.swt.widgets.Tree;
-import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Spinner;
-import org.eclipse.swt.widgets.Combo;
-import org.eclipse.swt.widgets.List;
-import org.eclipse.swt.events.SelectionAdapter;
-import org.eclipse.swt.events.SelectionEvent;
+
+import org.eclipse.swt.widgets.*;
+import org.eclipse.swt.events.*;
 
 public class gui {
+	
+	public gui() {
+	}
 
 	protected Shell shell;
 	private Text title;
@@ -101,12 +104,19 @@ public class gui {
 		pages.setFont(SWTResourceManager.getFont("Corbel Light", 9, SWT.NORMAL));
 		pages.setBounds(21, 247, 450, 28);
 		
+		pages.addSelectionListener(new SelectionAdapter() {
+            @Override
+            public void widgetSelected(SelectionEvent e) 
+            {
+                System.out.println(pages.getSelection());
+            }
+        });
+		
 		//BUCH KNOPF
 		
 		Button btnBuch = new Button(shell, SWT.NONE);
 		btnBuch.setBounds(21, 312, 150, 41);
 		btnBuch.setText("Buch hinzuf\u00FCgen");
-		
 		
 		
 		
@@ -144,7 +154,25 @@ public class gui {
 		Button btnAutor = new Button(shell, SWT.NONE);
 		btnAutor.setBounds(494, 312, 150, 41);
 		btnAutor.setText("Autor hinzuf\u00FCgen");
+		btnAutor.addListener(SWT.Selection, new Listener() 
+		{
+			public void handleEvent(Event e)
+			{
+				switch (e.type)
+				{
+				case SWT.Selection:
+					
+					authors author = new authors();
+					author.setFirstname(gui.this.firstname.getText());
+					author.setLastname(gui.this.lastname.getText());
+					
+					author.createAuthor(author);
+				}
+			}
+		});
 		
-
+		
+		
+		
 	}
 }

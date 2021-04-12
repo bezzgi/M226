@@ -1,19 +1,25 @@
 package m226;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
 public class books implements InterfaceBooks{
 	
 	String title;
-	String author;
 	int pages;
-	boolean lent;
+	int lent;
 	
-	//Setter und Getter für alle Variablen
-	public void setAuthor(String author) {
-		this.author = author;
-	}
-	public String getAuthor() {
-		return author;
-	}
+	private String conStr = "jdbc:mysql://localhost/library?user=root&password=";
+	private Connection con;
+	private Statement s;
+	private PreparedStatement ps;
+	private ResultSet rs;
+	
+	
+	//Setter und Getter f�r alle Variablen
 	public void setPages(int pages) {
 		this.pages = pages;
 	}
@@ -26,31 +32,50 @@ public class books implements InterfaceBooks{
 	public String getTitle() {
 		return title;
 	}
-	public void setLent(boolean lent) {
+	public void setLent(int lent) {
 		this.lent = lent;
 	}
-	public Boolean getLent() {
+	public int getLent() {
 		return lent;
 	}
 	
-	public void ausleihen() {
-
+	public void lend() {
 		
 	}
 	
-	public void zurückgeben() {
-
-		
+	public void giveBack() {
 		
 	}
 
-	public void buchErstellen() {
-
+	public void createBook(books book) {
 		
+		try 
+		{
+			// get data connection and data statement
+			con = DriverManager.getConnection(this.conStr);
+			
+			String query = "insert into books (title, pages, lent, authors_id_authors) values (?,?,?,?)";
+			ps = con.prepareStatement(query);
+			ps.setString(1, book.getTitle());
+			ps.setInt(2, book.getPages());
+			ps.setInt(3, book.getLent());
+			ps.setInt(4, 0);
+			
+			ps.execute();
+			// close data statement and data connection
+			ps.close();
+			con.close();
+		} 
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+			System.out.print(e.getMessage());
+		}
 	}
 	
-	public void buchLöschen() {
+	
+	
+	public void deleteBook() {
 
-		
 	}
 }
