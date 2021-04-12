@@ -61,7 +61,7 @@ public class gui {
 	protected void createContents() {
 		shell = new Shell();
 		shell.setSize(1000, 423);
-		shell.setText("SWT Application");
+		shell.setText("Library");
 		
 		//BUCH HINZUFÜGEN
 		
@@ -156,9 +156,9 @@ public class gui {
 		btnAutor.setText("Autor hinzuf\u00FCgen");
 		btnAutor.addListener(SWT.Selection, new Listener() 
 		{
-			public void handleEvent(Event e)
+			public void handleEvent(Event button)
 			{
-				switch (e.type)
+				switch (button.type)
 				{
 				case SWT.Selection:
 					
