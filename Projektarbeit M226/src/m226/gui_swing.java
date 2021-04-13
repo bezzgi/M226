@@ -3,6 +3,12 @@ package m226;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 import javax.swing.*;
 
@@ -12,13 +18,18 @@ public class gui_swing  extends JFrame implements ActionListener{
 	private JTextField title;
 	private JTextField firstname;
 	private JTextField lastname;
+	JComboBox authorBox = new JComboBox();
 	JButton btnBook = new JButton("Buch hinzuf\u00FCgen");
 	JButton btnAuthor = new JButton("Author hinzuf\u00FCgen");
 	
 	private String authorCommand = "author";
 	private String bookCommand = "book";
 	
-
+	private String conStr = "jdbc:mysql://localhost/library?user=root&password=";
+	private Connection con;
+	private Statement s;
+	private PreparedStatement ps;
+	private ResultSet rs;
 
 	/**
 	 * Launch the application.
@@ -43,6 +54,16 @@ public class gui_swing  extends JFrame implements ActionListener{
 	 */
 	 public gui_swing()
 	 {	
+		try 
+		{
+			Class.forName("com.mysql.jdbc.Driver");
+		} 
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		}
+		 
 		frame = new JFrame();
 		frame.setBounds(100, 100, 800, 400);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -64,9 +85,8 @@ public class gui_swing  extends JFrame implements ActionListener{
 		lblAuthor.setBounds(20, 139, 376, 19);
 		frame.getContentPane().add(lblAuthor);
 		
-		JComboBox author = new JComboBox();
-		author.setBounds(20, 159, 365, 28);
-		frame.getContentPane().add(author);
+		authorBox.setBounds(20, 159, 365, 28);
+		frame.getContentPane().add(authorBox);
 		
 		JLabel lblPages = new JLabel("Seiten");
 		lblPages.setFont(new Font("Corbel Light", Font.PLAIN, 15));
@@ -124,24 +144,57 @@ public class gui_swing  extends JFrame implements ActionListener{
 		frame.getContentPane().add(btnAuthor);
 		btnAuthor.setActionCommand(authorCommand);
 		
-	}
+		loadAuthors();
+	 }
+	 
+	 public void loadAuthors()
+	 {
+		 String query = "SELECT * FROM authors;";
+		 
+	     try 
+	     {
+	    	 con = DriverManager.getConnection(this.conStr);
+	    	 
+	    	 s = con.createStatement();
+	    	 
+	    	 rs = s.executeQuery(query);
+	    	 
+	    	 authorBox.removeAllItems();
+	    	 
+	    	 while (rs.next())
+			 {
+	    		 String firstname = rs.getString("firstname");
+	    		 String lastname = rs.getString("lastname");
+	    		 String fullname = firstname + " " + lastname;
+	    		 
+	    		 authorBox.addItem(fullname);
+			 }
+	    	 
+	    	 con.close();
+	     } 
+	     catch (SQLException e) 
+	     {
+	    	 e.printStackTrace();
+	     }
+	 }
 
-	@Override
-	public void actionPerformed(ActionEvent e) 
-	{	
-		if(e.getActionCommand().equals(authorCommand)) 
-		{			
-			authors author = new authors();
-			author.setFirstname(gui_swing.this.firstname.getText());
-			author.setLastname(gui_swing.this.lastname.getText());
+	 @Override
+	 public void actionPerformed(ActionEvent e) 
+	 {	
+		 if(e.getActionCommand().equals(authorCommand)) 
+		 {			
+			 authors author = new authors();
+			 author.setFirstname(gui_swing.this.firstname.getText());
+			 author.setLastname(gui_swing.this.lastname.getText());
 			
-			author.createAuthor(author);
-		}	
+			 author.createAuthor(author);
+			 loadAuthors();
+		 }	
 		
 		
-		if(e.getActionCommand().equals(bookCommand)) 
-		{			
-			
-		}	
-	}
+		 if(e.getActionCommand().equals(bookCommand)) 
+		 {			
+			 System.out.println("nigga gay");
+		 }
+	 }
 }
