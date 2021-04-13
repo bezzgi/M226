@@ -18,12 +18,16 @@ public class gui_swing  extends JFrame implements ActionListener{
 	private JTextField title;
 	private JTextField firstname;
 	private JTextField lastname;
+	JSpinner pages = new JSpinner();
 	JComboBox authorBox = new JComboBox();
+	JComboBox deleteAuthorBox = new JComboBox();
 	JButton btnBook = new JButton("Buch hinzuf\u00FCgen");
 	JButton btnAuthor = new JButton("Author hinzuf\u00FCgen");
+	JButton btnDeleteAuthor = new JButton("Autor l\u00F6schen");
 	
 	private String authorCommand = "author";
 	private String bookCommand = "book";
+	private String deleteAuthorCommand = "deleteAuthor";
 	
 	private String conStr = "jdbc:mysql://localhost/library?user=root&password=";
 	private Connection con;
@@ -65,7 +69,7 @@ public class gui_swing  extends JFrame implements ActionListener{
 		}
 		 
 		frame = new JFrame();
-		frame.setBounds(100, 100, 800, 400);
+		frame.setBounds(100, 100, 1100, 400);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
@@ -93,12 +97,11 @@ public class gui_swing  extends JFrame implements ActionListener{
 		lblPages.setBounds(20, 208, 376, 19);
 		frame.getContentPane().add(lblPages);
 		
-		JSpinner pages = new JSpinner();
 		pages.setBounds(20, 228, 365, 28);
 		frame.getContentPane().add(pages);
 		
 		JButton btnBook = new JButton("Buch hinzuf\u00FCgen");
-		btnBook.setBounds(20, 279, 150, 35);
+		btnBook.setBounds(20, 280, 150, 35);
 		btnBook.addActionListener(this);
 		frame.getContentPane().add(btnBook);
 		btnBook.setActionCommand(bookCommand);
@@ -139,20 +142,46 @@ public class gui_swing  extends JFrame implements ActionListener{
 		frame.getContentPane().add(lastname);
 		
 		JButton btnAuthor = new JButton("Author hinzuf\u00FCgen");
-		btnAuthor.setBounds(400, 279, 150, 35);
+		btnAuthor.setBounds(400, 280, 150, 35);
 		btnAuthor.addActionListener(this);
 		frame.getContentPane().add(btnAuthor);
 		btnAuthor.setActionCommand(authorCommand);
+		
+		JLabel lblAuthors = new JLabel("Autoren");
+		lblAuthors.setFont(new Font("Corbel Light", Font.PLAIN, 15));
+		lblAuthors.setBounds(780, 70, 376, 19);
+		frame.getContentPane().add(lblAuthors);
+		
+		JLabel lblAutorLoeschen = new JLabel("Autor l\u00F6schen");
+		lblAutorLoeschen.setVerticalAlignment(SwingConstants.TOP);
+		lblAutorLoeschen.setFont(new Font("Corbel Light", Font.PLAIN, 35));
+		lblAutorLoeschen.setBounds(780, 20, 360, 36);
+		frame.getContentPane().add(lblAutorLoeschen);
+		
+		
+		
+		
+		
+		deleteAuthorBox.setBounds(780, 90, 280, 28);
+		frame.getContentPane().add(deleteAuthorBox);
+		
+		JButton btnDeleteAuthor = new JButton("Autor l\u00F6schen");
+		btnDeleteAuthor.setBounds(780, 280, 150, 35);
+		btnDeleteAuthor.addActionListener(this);
+		frame.getContentPane().add(btnDeleteAuthor);
+		btnDeleteAuthor.setActionCommand(deleteAuthorCommand);
+		
+		
 		
 		loadAuthors();
 	 }
 	 
 	 public void loadAuthors()
-	 {
-		 String query = "SELECT * FROM authors;";
-		 
+	 { 
 	     try 
 	     {
+	    	 String query = "SELECT * FROM authors;";
+	    	 
 	    	 con = DriverManager.getConnection(this.conStr);
 	    	 
 	    	 s = con.createStatement();
@@ -160,21 +189,25 @@ public class gui_swing  extends JFrame implements ActionListener{
 	    	 rs = s.executeQuery(query);
 	    	 
 	    	 authorBox.removeAllItems();
+	    	 deleteAuthorBox.removeAllItems();
 	    	 
 	    	 while (rs.next())
 			 {
+	    		 int id_authors = rs.getInt("id_authors");
 	    		 String firstname = rs.getString("firstname");
 	    		 String lastname = rs.getString("lastname");
-	    		 String fullname = firstname + " " + lastname;
+	    		 String fullname = id_authors + " | " + firstname + " " + lastname;
 	    		 
 	    		 authorBox.addItem(fullname);
+	    		 
+	    		 deleteAuthorBox.addItem(fullname);
 			 }
 	    	 
 	    	 con.close();
 	     } 
-	     catch (SQLException e) 
+	     catch (SQLException sqle) 
 	     {
-	    	 e.printStackTrace();
+	    	 sqle.printStackTrace();
 	     }
 	 }
 
@@ -186,15 +219,87 @@ public class gui_swing  extends JFrame implements ActionListener{
 			 authors author = new authors();
 			 author.setFirstname(gui_swing.this.firstname.getText());
 			 author.setLastname(gui_swing.this.lastname.getText());
-			
-			 author.createAuthor(author);
-			 loadAuthors();
+			 
+			 if(gui_swing.this.firstname.getText().equals("") || gui_swing.this.lastname.getText().equals(""))
+			 {
+				 
+			 }
+			 else
+			 {
+				 author.createAuthor(author);
+				 loadAuthors();
+			 } 
 		 }	
 		
 		
 		 if(e.getActionCommand().equals(bookCommand)) 
 		 {			
-			 System.out.println("nigga gay");
+			 books book = new books();
+			 book.setTitle(gui_swing.this.title.getText());
+			 
+			 
+			 int valuePages = (Integer) pages.getValue();
+			 book.setPages(valuePages);
+			 
+			 
+			 String selectedAuthor = authorBox.getSelectedItem().toString();
+			 String[] splitAuthor = selectedAuthor.split(" ");	 
+			 
+			 
+			 book.setLent(0);
+			 
+			 
+		     try 
+		     {
+		    	 String query = "SELECT id_authors FROM authors where id_authors = '" + splitAuthor[0] + "'";
+		    	 
+		    	 con = DriverManager.getConnection(this.conStr);
+		    	 
+		    	 s = con.createStatement();
+		    	 
+		    	 rs = s.executeQuery(query);
+		    	 
+		    	 while (rs.next())
+				 {
+		    		 int idAuthor = rs.getInt("id_authors");
+		    		 
+		    		 book.setIdAuthor(idAuthor);
+		    		 
+				 }
+		    	 
+		    	 con.close();
+		     } 
+		     catch (SQLException sqle) 
+		     {
+		    	 sqle.printStackTrace();
+		     }
+		     
+		     book.createBook(book);
+		 }
+		 
+		 if(e.getActionCommand().equals(deleteAuthorCommand))
+		 {
+			 String selectedAuthor = deleteAuthorBox.getSelectedItem().toString();
+			 String[] splitAuthor = selectedAuthor.split(" ");	
+			 
+			 try 
+		     {
+		    	 String query = "DELETE FROM authors WHERE id_authors = '" + splitAuthor[0] + "'";
+		    	 
+		    	 con = DriverManager.getConnection(this.conStr);
+		    	 
+		    	 s = con.createStatement();
+		    	 
+		    	 s.executeUpdate(query);
+		    	 
+		    	 con.close();
+		     } 
+		     catch (SQLException sqle) 
+		     {
+		    	 sqle.printStackTrace();
+		     }
+			 
+			 loadAuthors();
 		 }
 	 }
 }

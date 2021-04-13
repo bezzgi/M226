@@ -11,6 +11,7 @@ public class books implements InterfaceBooks{
 	String title;
 	int pages;
 	int lent;
+	int idAuthor;
 	
 	private String conStr = "jdbc:mysql://localhost/library?user=root&password=";
 	private Connection con;
@@ -38,6 +39,15 @@ public class books implements InterfaceBooks{
 	public int getLent() {
 		return lent;
 	}
+	public void setIdAuthor(int idAuthor) {
+		this.idAuthor = idAuthor;
+	}
+	public int getIdAuthor() {
+		return idAuthor;
+	}
+	
+	
+	
 	
 	public void lend() {
 		
@@ -59,7 +69,7 @@ public class books implements InterfaceBooks{
 			ps.setString(1, book.getTitle());
 			ps.setInt(2, book.getPages());
 			ps.setInt(3, book.getLent());
-			ps.setInt(4, 0);
+			ps.setInt(4, book.getIdAuthor());
 			
 			ps.execute();
 			// close data statement and data connection
