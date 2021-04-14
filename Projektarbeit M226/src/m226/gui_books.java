@@ -18,12 +18,17 @@ public class gui_books extends JFrame implements ActionListener{
 	JButton btnLend = new JButton("Ausleihen");
 	JButton btnDelete = new JButton("Löschen");
 	JButton btnNew = new JButton("Neu");
+	JButton btnGiveBack = new JButton("Zurückgeben");
 	JList availableList = new JList();
-	DefaultListModel DLM = new DefaultListModel();
+	JList lentList = new JList();
+	DefaultListModel DLMAvailable = new DefaultListModel();
+	DefaultListModel DLMLent = new DefaultListModel();
 	
 	
 	private String deleteBook = "deleteBook";
 	private String lendBook = "lendBook";
+	private String giveBack = "giveBack";
+	private String newBook = "newBook";
 	
 	private String conStr = "jdbc:mysql://localhost/library?user=root&password=";
 	private Connection con;
@@ -84,9 +89,9 @@ public class gui_books extends JFrame implements ActionListener{
         
         btnNew.addActionListener(this);
         btnNew.setBounds(345, 220, 120, 30);
+        btnNew.setActionCommand(newBook);
         frame.getContentPane().add(btnNew);
         
-        JList lentList = new JList();
         lentList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         lentList.setBounds(20, 335, 445, 133);
         frame.getContentPane().add(lentList);
@@ -97,9 +102,10 @@ public class gui_books extends JFrame implements ActionListener{
         lblLentBooks.setBounds(20, 292, 444, 43);
         frame.getContentPane().add(lblLentBooks);
         
-        JButton btnGiveBack = new JButton("Zurückgeben");
+        btnGiveBack.addActionListener(this);
         btnGiveBack.setActionCommand("lendBook");
         btnGiveBack.setBounds(20, 490, 120, 30);
+        btnGiveBack.setActionCommand(giveBack);
         frame.getContentPane().add(btnGiveBack);
 		
 		loadBooks();
@@ -110,15 +116,15 @@ public class gui_books extends JFrame implements ActionListener{
 
 		try 
 	     {
-	    	 String query = "SELECT * FROM books as b left join authors as s on s.id_authors = b.authors_id_authors where b.lent = 0";
+	    	 String queryAvailable = "SELECT * FROM books as b left join authors as s on s.id_authors = b.authors_id_authors where b.lent = 0";
 	    	 
 	    	 con = DriverManager.getConnection(this.conStr);
 	    	 
 	    	 s = con.createStatement();
 	    	 
-	    	 rs = s.executeQuery(query);
+	    	 rs = s.executeQuery(queryAvailable);
 	    	 
-	    	 DLM.removeAllElements();
+	    	 DLMAvailable.removeAllElements();
 	    	 
 	    	 while (rs.next())
 			 {
@@ -128,16 +134,41 @@ public class gui_books extends JFrame implements ActionListener{
 	    		 String firstname = rs.getString("firstname");
 	    		 String lastname = rs.getString("lastname");
 	    		 
-	    		 DLM.addElement(id_books + " | " + title + " | " + pages + " | " + firstname + " " + lastname);
-	    		 availableList.setModel(DLM);
+	    		 DLMAvailable.addElement(id_books + " | " + title + " | " + pages + " | " + firstname + " " + lastname);
+	    		 availableList.setModel(DLMAvailable);
 			 }
+	    	 
+	    	 
+	    	 
+	    	 String queryLable = "SELECT * FROM books as b left join authors as s on s.id_authors = b.authors_id_authors where b.lent = 1";
+	    	 
+	    	 con = DriverManager.getConnection(this.conStr);
+	    	 
+	    	 s = con.createStatement();
+	    	 
+	    	 rs = s.executeQuery(queryLable);
+	    	 
+	    	 DLMLent.removeAllElements();
+	    	 
+	    	 while (rs.next())
+			 {
+	    		 int id_books = rs.getInt("id_books");
+	    		 String title = rs.getString("title");
+	    		 int pages = rs.getInt("pages");
+	    		 String firstname = rs.getString("firstname");
+	    		 String lastname = rs.getString("lastname");
+	    		 
+	    		 DLMLent.addElement(id_books + " | " + title + " | " + pages + " | " + firstname + " " + lastname);
+	    		 lentList.setModel(DLMLent);
+			 }
+	    	 
 	    	 
 	    	 con.close();
 	     }
-			catch (SQLException sqle) 
+		 catch (SQLException sqle1) 
 	     {
-	    	 sqle.printStackTrace();
-	     }
+			 
+		 }
 	}
 
 	@Override
@@ -167,7 +198,7 @@ public class gui_books extends JFrame implements ActionListener{
 			    } 
 			    catch (SQLException sqle) 
 			    {
-			    	sqle.printStackTrace();
+			    	
 			    }
 				
 				loadBooks();
@@ -202,12 +233,47 @@ public class gui_books extends JFrame implements ActionListener{
 		    } 
 		    catch (SQLException sqle) 
 		    {
-		    	sqle.printStackTrace();
+		    	
 		    }
 			
 			loadBooks();
 			
 		}
 		
+		if(e.getActionCommand().equals(giveBack))
+		{
+			String listValue = lentList.getSelectedValue().toString();
+			
+			String[] splitList  = listValue.split(" ");
+			
+			System.out.println(splitList[0]);
+			
+			try 
+		    {
+				String query = "UPDATE books SET lent = 0 WHERE id_books = '" + splitList[0] + "'";
+		    	 
+		    	con = DriverManager.getConnection(this.conStr);
+		    	 
+		    	s = con.createStatement();
+		    	 
+		    	s.executeUpdate(query);
+		    	 
+		    	con.close();
+		    } 
+		    catch (SQLException sqle) 
+		    {
+		    	
+		    }
+			
+			loadBooks();
+		}
+		
+		
+		if(e.getActionCommand().equals(newBook))
+		{
+			gui_swing start = new gui_swing();
+			
+			start.frame.setVisible(true);
+		}
 	}
 }

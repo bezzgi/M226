@@ -14,7 +14,7 @@ import javax.swing.*;
 
 public class gui_swing  extends JFrame implements ActionListener{
 
-	private JFrame frame;
+	public JFrame frame;
 	private JTextField title;
 	private JTextField firstname;
 	private JTextField lastname;
