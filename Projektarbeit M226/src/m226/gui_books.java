@@ -274,6 +274,7 @@ public class gui_books extends JFrame implements ActionListener{
 			gui_swing start = new gui_swing();
 			
 			start.frame.setVisible(true);
+			
 		}
 	}
 }
