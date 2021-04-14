@@ -18,7 +18,7 @@ public class gui_books extends JFrame implements ActionListener{
 	JButton btnLend = new JButton("Ausleihen");
 	JButton btnDelete = new JButton("Löschen");
 	JButton btnNew = new JButton("Neu");
-	JList list = new JList();
+	JList availableList = new JList();
 	DefaultListModel DLM = new DefaultListModel();
 	
 	
@@ -57,19 +57,19 @@ public class gui_books extends JFrame implements ActionListener{
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		list.setBounds(20, 65, 445, 133);
-		list.setSelectionMode(DefaultListSelectionModel.SINGLE_SELECTION);
-		frame.getContentPane().add(list);
+		availableList.setBounds(20, 65, 445, 133);
+		availableList.setSelectionMode(DefaultListSelectionModel.SINGLE_SELECTION);
+		frame.getContentPane().add(availableList);
 		
 		JScrollBar scrollBar = new JScrollBar();
 		scrollBar.setBounds(448, 65, 17, 133);
 		frame.getContentPane().add(scrollBar);
 		
-		JLabel lblNewLabel = new JLabel("Verfügbare Bücher");
-		lblNewLabel.setVerticalAlignment(SwingConstants.TOP);
-		lblNewLabel.setFont(new Font("Corbel", Font.PLAIN, 35));
-		lblNewLabel.setBounds(20, 22, 444, 43);
-		frame.getContentPane().add(lblNewLabel);
+		JLabel lblAvailableBooks = new JLabel("Verfügbare Bücher");
+		lblAvailableBooks.setVerticalAlignment(SwingConstants.TOP);
+		lblAvailableBooks.setFont(new Font("Corbel", Font.PLAIN, 35));
+		lblAvailableBooks.setBounds(20, 22, 444, 43);
+		frame.getContentPane().add(lblAvailableBooks);
 		
 		
         btnLend.addActionListener(this);
@@ -85,6 +85,22 @@ public class gui_books extends JFrame implements ActionListener{
         btnNew.addActionListener(this);
         btnNew.setBounds(345, 220, 120, 30);
         frame.getContentPane().add(btnNew);
+        
+        JList lentList = new JList();
+        lentList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        lentList.setBounds(20, 335, 445, 133);
+        frame.getContentPane().add(lentList);
+        
+        JLabel lblLentBooks = new JLabel("Ausgeliehene Bücher");
+        lblLentBooks.setVerticalAlignment(SwingConstants.TOP);
+        lblLentBooks.setFont(new Font("Corbel", Font.PLAIN, 35));
+        lblLentBooks.setBounds(20, 292, 444, 43);
+        frame.getContentPane().add(lblLentBooks);
+        
+        JButton btnGiveBack = new JButton("Zurückgeben");
+        btnGiveBack.setActionCommand("lendBook");
+        btnGiveBack.setBounds(20, 490, 120, 30);
+        frame.getContentPane().add(btnGiveBack);
 		
 		loadBooks();
 	}
@@ -113,7 +129,7 @@ public class gui_books extends JFrame implements ActionListener{
 	    		 String lastname = rs.getString("lastname");
 	    		 
 	    		 DLM.addElement(id_books + " | " + title + " | " + pages + " | " + firstname + " " + lastname);
-	    		 list.setModel(DLM);
+	    		 availableList.setModel(DLM);
 			 }
 	    	 
 	    	 con.close();
@@ -131,7 +147,7 @@ public class gui_books extends JFrame implements ActionListener{
 		{
 			try 
 			{
-				String listValue = list.getSelectedValue().toString();
+				String listValue = availableList.getSelectedValue().toString();
 				
 				String[] splitList  = listValue.split(" ");
 				
@@ -166,7 +182,7 @@ public class gui_books extends JFrame implements ActionListener{
 		if(e.getActionCommand().equals(lendBook))
 		{
 
-			String listValue = list.getSelectedValue().toString();
+			String listValue = availableList.getSelectedValue().toString();
 			
 			String[] splitList  = listValue.split(" ");
 			
