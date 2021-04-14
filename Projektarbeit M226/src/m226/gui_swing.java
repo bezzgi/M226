@@ -21,9 +21,9 @@ public class gui_swing  extends JFrame implements ActionListener{
 	JSpinner pages = new JSpinner();
 	JComboBox authorBox = new JComboBox();
 	JComboBox deleteAuthorBox = new JComboBox();
-	JButton btnBook = new JButton("Buch hinzuf\u00FCgen");
-	JButton btnAuthor = new JButton("Author hinzuf\u00FCgen");
-	JButton btnDeleteAuthor = new JButton("Autor l\u00F6schen");
+	JButton btnBook = new JButton("Buch hinzufügen");
+	JButton btnAuthor = new JButton("Author hinzufügen");
+	JButton btnDeleteAuthor = new JButton("Autor löschen");
 	
 	private String authorCommand = "author";
 	private String bookCommand = "book";
@@ -100,7 +100,7 @@ public class gui_swing  extends JFrame implements ActionListener{
 		pages.setBounds(20, 228, 365, 28);
 		frame.getContentPane().add(pages);
 		
-		JButton btnBook = new JButton("Buch hinzuf\u00FCgen");
+		JButton btnBook = new JButton("Buch hinzufügen");
 		btnBook.setBounds(20, 280, 150, 35);
 		btnBook.addActionListener(this);
 		frame.getContentPane().add(btnBook);
@@ -141,7 +141,7 @@ public class gui_swing  extends JFrame implements ActionListener{
 		lastname.setBounds(400, 159, 365, 28);
 		frame.getContentPane().add(lastname);
 		
-		JButton btnAuthor = new JButton("Author hinzuf\u00FCgen");
+		JButton btnAuthor = new JButton("Author hinzufügen");
 		btnAuthor.setBounds(400, 280, 150, 35);
 		btnAuthor.addActionListener(this);
 		frame.getContentPane().add(btnAuthor);
@@ -152,7 +152,7 @@ public class gui_swing  extends JFrame implements ActionListener{
 		lblAuthors.setBounds(780, 70, 376, 19);
 		frame.getContentPane().add(lblAuthors);
 		
-		JLabel lblAutorLoeschen = new JLabel("Autor l\u00F6schen");
+		JLabel lblAutorLoeschen = new JLabel("Autor löschen");
 		lblAutorLoeschen.setVerticalAlignment(SwingConstants.TOP);
 		lblAutorLoeschen.setFont(new Font("Corbel Light", Font.PLAIN, 35));
 		lblAutorLoeschen.setBounds(780, 20, 360, 36);
@@ -165,7 +165,7 @@ public class gui_swing  extends JFrame implements ActionListener{
 		deleteAuthorBox.setBounds(780, 90, 280, 28);
 		frame.getContentPane().add(deleteAuthorBox);
 		
-		JButton btnDeleteAuthor = new JButton("Autor l\u00F6schen");
+		JButton btnDeleteAuthor = new JButton("Autor löschen");
 		btnDeleteAuthor.setBounds(780, 280, 150, 35);
 		btnDeleteAuthor.addActionListener(this);
 		frame.getContentPane().add(btnDeleteAuthor);

@@ -16,9 +16,9 @@ public class gui_books extends JFrame implements ActionListener{
 
 	private JFrame frame;
 	JButton btnLend = new JButton("Ausleihen");
-	JButton btnDelete = new JButton("LÃ¶schen");
+	JButton btnDelete = new JButton("Löschen");
 	JButton btnNew = new JButton("Neu");
-	JButton btnGiveBack = new JButton("ZurÃ¼ckgeben");
+	JButton btnGiveBack = new JButton("Zurückgeben");
 	JList availableList = new JList();
 	JList lentList = new JList();
 	DefaultListModel DLMAvailable = new DefaultListModel();
@@ -66,11 +66,8 @@ public class gui_books extends JFrame implements ActionListener{
 		availableList.setSelectionMode(DefaultListSelectionModel.SINGLE_SELECTION);
 		frame.getContentPane().add(availableList);
 		
-		JScrollBar scrollBar = new JScrollBar();
-		scrollBar.setBounds(448, 65, 17, 133);
-		frame.getContentPane().add(scrollBar);
 		
-		JLabel lblAvailableBooks = new JLabel("VerfÃ¼gbare BÃ¼cher");
+		JLabel lblAvailableBooks = new JLabel("Verfügbare Bücher");
 		lblAvailableBooks.setVerticalAlignment(SwingConstants.TOP);
 		lblAvailableBooks.setFont(new Font("Corbel", Font.PLAIN, 35));
 		lblAvailableBooks.setBounds(20, 22, 444, 43);
@@ -96,7 +93,9 @@ public class gui_books extends JFrame implements ActionListener{
         lentList.setBounds(20, 335, 445, 133);
         frame.getContentPane().add(lentList);
         
-        JLabel lblLentBooks = new JLabel("Ausgeliehene BÃ¼cher");
+        
+        
+        JLabel lblLentBooks = new JLabel("Ausgeliehene Bücher");
         lblLentBooks.setVerticalAlignment(SwingConstants.TOP);
         lblLentBooks.setFont(new Font("Corbel", Font.PLAIN, 35));
         lblLentBooks.setBounds(20, 292, 444, 43);
