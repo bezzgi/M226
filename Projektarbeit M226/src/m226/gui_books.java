@@ -23,6 +23,7 @@ public class gui_books extends JFrame implements ActionListener{
 	
 	
 	private String deleteBook = "deleteBook";
+	private String lendBook = "lendBook";
 	
 	private String conStr = "jdbc:mysql://localhost/library?user=root&password=";
 	private Connection con;
@@ -73,6 +74,7 @@ public class gui_books extends JFrame implements ActionListener{
 		
         btnLend.addActionListener(this);
         btnLend.setBounds(20, 220, 120, 30);
+        btnLend.setActionCommand(lendBook);
         frame.getContentPane().add(btnLend);
 
         btnDelete.addActionListener(this);
@@ -158,6 +160,36 @@ public class gui_books extends JFrame implements ActionListener{
 			{
 				
 			}
+			
+		}
+		
+		if(e.getActionCommand().equals(lendBook))
+		{
+
+			String listValue = list.getSelectedValue().toString();
+			
+			String[] splitList  = listValue.split(" ");
+			
+			System.out.println(splitList[0]);
+			
+			try 
+		    {
+				String query = "UPDATE books SET lent = 1 WHERE id_books = '" + splitList[0] + "'";
+		    	 
+		    	con = DriverManager.getConnection(this.conStr);
+		    	 
+		    	s = con.createStatement();
+		    	 
+		    	s.executeUpdate(query);
+		    	 
+		    	con.close();
+		    } 
+		    catch (SQLException sqle) 
+		    {
+		    	sqle.printStackTrace();
+		    }
+			
+			loadBooks();
 			
 		}
 		
