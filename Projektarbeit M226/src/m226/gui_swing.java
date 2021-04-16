@@ -13,7 +13,7 @@ import java.sql.Statement;
 
 import javax.swing.*;
 
-public class gui_swing  extends JFrame implements ActionListener{
+public class gui_swing  extends JFrame implements ActionListener {
 
 	public JFrame frame;
 	private JTextField title;
