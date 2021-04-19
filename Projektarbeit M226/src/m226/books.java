@@ -4,10 +4,12 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 public class books implements InterfaceBooks{
 	
+	int idBook;
 	String title;
 	int pages;
 	int lent;
@@ -21,6 +23,12 @@ public class books implements InterfaceBooks{
 	
 	
 	//Setter und Getter für alle Variablen
+	public void setIdBook(int id_books) {
+		this.idBook = id_books;
+	}
+	public int getIdBook() {
+		return idBook;
+	}
 	public void setPages(int pages) {
 		this.pages = pages;
 	}
@@ -49,12 +57,44 @@ public class books implements InterfaceBooks{
 	
 	
 	
-	public void lend() {
-		
+	public void lend() 
+	{
+		try 
+	    {
+			String query = "UPDATE books SET lent = 1 WHERE id_books = '" + idBook + "'";
+	    	 
+	    	con = DriverManager.getConnection(this.conStr);
+	    	 
+	    	s = con.createStatement();
+	    	 
+	    	s.executeUpdate(query);
+	    	 
+	    	con.close();
+	    } 
+	    catch (SQLException sqle) 
+	    {
+	    	
+	    }
 	}
 	
-	public void giveBack() {
-		
+	public void giveBack() 
+	{
+		try 
+	    {
+			String query = "UPDATE books SET lent = 0 WHERE id_books = '" + idBook + "'";
+	    	 
+	    	con = DriverManager.getConnection(this.conStr);
+	    	 
+	    	s = con.createStatement();
+	    	 
+	    	s.executeUpdate(query);
+	    	 
+	    	con.close();
+	    } 
+	    catch (SQLException sqle) 
+	    {
+	    	
+	    }
 	}
 
 	public void createBook(books book) {
@@ -85,7 +125,23 @@ public class books implements InterfaceBooks{
 	
 	
 	
-	public void deleteBook() {
-
+	public void deleteBook() 
+	{
+		try 
+	    {
+			String query = "DELETE FROM books WHERE id_books = '" + idBook + "'";
+	    	 
+	    	con = DriverManager.getConnection(this.conStr);
+	    	 
+	    	s = con.createStatement();
+	    	 
+	    	s.executeUpdate(query);
+	    	 
+	    	con.close();
+	    } 
+	    catch (SQLException sqle) 
+	    {
+	    	
+	    }
 	}
 }
