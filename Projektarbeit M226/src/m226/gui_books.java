@@ -26,7 +26,8 @@ public class gui_books extends JFrame implements ActionListener{
 	JList lentList = new JList();
 	DefaultListModel DLMAvailable = new DefaultListModel();
 	DefaultListModel DLMLent = new DefaultListModel();
-	JLabel lblLibrary = new JLabel("");
+	JLabel lblLibrary = new JLabel("Bibliothek: ");
+	JLabel lblLocation = new JLabel("Standort: ");
 	
 	private String deleteBook = "deleteBook";
 	private String lendBook = "lendBook";
@@ -39,6 +40,7 @@ public class gui_books extends JFrame implements ActionListener{
 	private Statement s;
 	private PreparedStatement ps;
 	private ResultSet rs;	
+	
 	
 	public void setIdLibrary(int idLibrary) {
 		this.idLibrary = idLibrary;
@@ -122,11 +124,18 @@ public class gui_books extends JFrame implements ActionListener{
         frame.getContentPane().add(btnReload);
         
         
-        lblLibrary.setFont(new Font("Corbel", Font.PLAIN, 10));
-        lblLibrary.setBounds(20, 540, 45, 13);
+        lblLibrary.setHorizontalAlignment(SwingConstants.LEFT);
+        lblLibrary.setVerticalAlignment(SwingConstants.TOP);
+        lblLibrary.setFont(new Font("Corbel", Font.PLAIN, 15));
+        lblLibrary.setBounds(20, 530, 218, 19);
         frame.getContentPane().add(lblLibrary);
         
         
+        lblLocation.setHorizontalAlignment(SwingConstants.RIGHT);
+        lblLocation.setVerticalAlignment(SwingConstants.TOP);
+        lblLocation.setFont(new Font("Corbel", Font.PLAIN, 15));
+        lblLocation.setBounds(247, 530, 218, 19);
+        frame.getContentPane().add(lblLocation);
 	}
 	
 	public void loadBooks()
@@ -179,6 +188,27 @@ public class gui_books extends JFrame implements ActionListener{
 	    		 lentList.setModel(DLMLent);
 			 }
 	    	 
+	    	 
+	    	 
+	    	 
+	    	 String queryIdLibrary = "SELECT * FROM library where id_library = " + idLibrary;
+	    	 
+	    	 con = DriverManager.getConnection(this.conStr);
+	    	 
+	    	 s = con.createStatement();
+	    	 
+	    	 rs = s.executeQuery(queryIdLibrary);
+	    	 
+	    	 DLMLent.removeAllElements();
+	    	 
+	    	 while (rs.next())
+			 {
+	    		 String name = rs.getString("name");
+	    		 String location = rs.getString("location");
+	    		 
+	    		 lblLibrary.setText("Bibliothek: " + name);
+	    		 lblLocation.setText("Standort: " + location);
+			 }
 	    	 
 	    	 con.close();
 	     }
