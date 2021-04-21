@@ -258,9 +258,4 @@ public class gui_books extends JFrame implements ActionListener{
 			loadBooks();
 		}
 	}
-
-	private int parseInt(String string) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 }

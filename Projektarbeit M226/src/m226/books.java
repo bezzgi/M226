@@ -19,7 +19,6 @@ public class books implements InterfaceBooks{
 	private Connection con;
 	private Statement s;
 	private PreparedStatement ps;
-	private ResultSet rs;
 	
 	
 	//Setter und Getter für alle Variablen
