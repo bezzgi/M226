@@ -36,7 +36,7 @@ public class gui_library  extends JFrame implements ActionListener {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					gui_swing window = new gui_swing();
+					gui_library window = new gui_library();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -63,7 +63,7 @@ public class gui_library  extends JFrame implements ActionListener {
 		}
 		 
 		frame = new JFrame();
-		frame.setBounds(100, 100, 1100, 400);
+		frame.setBounds(100, 100, 800, 300);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
@@ -123,13 +123,74 @@ public class gui_library  extends JFrame implements ActionListener {
 		frame.getContentPane().add(btnChoose);
 		btnChoose.setActionCommand(choose);
 		
+		loadLibraries();
+		
+		String gay= lblLibrary.getText();
 	}
 	 
-	 
+	 public void loadLibraries()
+	 { 
+	     try 
+	     {
+	    	 String query = "SELECT * FROM library";
+	    	 
+	    	 con = DriverManager.getConnection(this.conStr);
+	    	 
+	    	 s = con.createStatement();
+	    	 
+	    	 rs = s.executeQuery(query);
+	    	 
+	    	 chooseLibrary.removeAllItems();
+	    	 
+	    	 while (rs.next())
+			 {
+	    		 int id_library = rs.getInt("id_library");
+	    		 String name = rs.getString("name");
+	    		 String location = rs.getString("location");
+	    		 String fullname = id_library + " | " + name + " | " + location;
+	    		 
+	    		 chooseLibrary.addItem(fullname);
+			 }
+	    	 
+	    	 con.close();
+	     }
+	     catch (SQLException sqle) 
+	     {
+	    	 sqle.printStackTrace();
+	     }
+	 }
 
 	@Override
 	public void actionPerformed(ActionEvent e) 
 	{	
+		if(e.getActionCommand().equals(create))
+		{
+			
+			libraries library = new libraries();
+			library.setName(gui_library.this.name.getText());
+			library.setLocation(gui_library.this.location.getText());
+			
+			library.createLibrary(library);
+			
+			loadLibraries();
+		}
 		 
+		if(e.getActionCommand().equals(choose))
+		{
+			String selectedLibrary = chooseLibrary.getSelectedItem().toString();
+			String[] splitLibrary = selectedLibrary.split(" ");
+			
+			int idLibrary = Integer.parseInt(splitLibrary[0]);
+			
+			gui_books gui = new gui_books();
+			
+			gui.setIdLibrary(idLibrary);
+			
+			gui.frame.setVisible(true);
+			
+			gui.loadBooks();
+			
+			this.frame.dispose();
+		}
 	}
 }

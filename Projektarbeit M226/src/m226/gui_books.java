@@ -14,7 +14,9 @@ import javax.swing.*;
 
 public class gui_books extends JFrame implements ActionListener{
 
-	private JFrame frame;
+	private int idLibrary;
+	
+	public JFrame frame;
 	JButton btnLend = new JButton("Ausleihen");
 	JButton btnDelete = new JButton("Löschen");
 	JButton btnNew = new JButton("Neu");
@@ -24,7 +26,7 @@ public class gui_books extends JFrame implements ActionListener{
 	JList lentList = new JList();
 	DefaultListModel DLMAvailable = new DefaultListModel();
 	DefaultListModel DLMLent = new DefaultListModel();
-	
+	JLabel lblLibrary = new JLabel("");
 	
 	private String deleteBook = "deleteBook";
 	private String lendBook = "lendBook";
@@ -36,12 +38,17 @@ public class gui_books extends JFrame implements ActionListener{
 	private Connection con;
 	private Statement s;
 	private PreparedStatement ps;
-	private ResultSet rs;
+	private ResultSet rs;	
+	
+	public void setIdLibrary(int idLibrary) {
+		this.idLibrary = idLibrary;
+	}
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -57,10 +64,11 @@ public class gui_books extends JFrame implements ActionListener{
 	/**
 	 * Create the application.
 	 */
+	
 	public gui_books() {
 		
 		frame = new JFrame();
-		frame.setBounds(100, 100, 500, 700);
+		frame.setBounds(100, 100, 500, 600);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
@@ -112,15 +120,20 @@ public class gui_books extends JFrame implements ActionListener{
         btnReload.setBounds(345, 490, 120, 30);
         btnReload.setActionCommand(reload);
         frame.getContentPane().add(btnReload);
-		
-		loadBooks();
+        
+        
+        lblLibrary.setFont(new Font("Corbel", Font.PLAIN, 10));
+        lblLibrary.setBounds(20, 540, 45, 13);
+        frame.getContentPane().add(lblLibrary);
+        
+        
 	}
 	
 	public void loadBooks()
-	{
+	{	
 		try 
-	     {
-	    	 String queryAvailable = "SELECT * FROM books as b left join authors as s on s.id_authors = b.authors_id_authors where b.lent = 0 order by title";
+	     {					
+	    	 String queryAvailable = "SELECT * FROM books as b left join authors as s on s.id_authors = b.authors_id_authors where b.lent = 0 and b.library_id_library = " + idLibrary + " order by title";
 	    	 
 	    	 con = DriverManager.getConnection(this.conStr);
 	    	 
@@ -144,7 +157,7 @@ public class gui_books extends JFrame implements ActionListener{
 	    	 
 	    	 
 	    	 
-	    	 String queryLent = "SELECT * FROM books as b left join authors as s on s.id_authors = b.authors_id_authors where b.lent = 1 order by title";
+	    	 String queryLent = "SELECT * FROM books as b left join authors as s on s.id_authors = b.authors_id_authors where b.lent = 1 and b.library_id_library = " + idLibrary + " order by title";
 	    	 
 	    	 con = DriverManager.getConnection(this.conStr);
 	    	 
@@ -251,6 +264,7 @@ public class gui_books extends JFrame implements ActionListener{
 			
 			start.frame.setVisible(true);
 			
+			start.setIdLibrary(idLibrary);
 		}
 		
 		if(e.getActionCommand().equals(reload))

@@ -15,6 +15,8 @@ import javax.swing.*;
 
 public class gui_swing  extends JFrame implements ActionListener {
 
+	private int idLibrary;
+	
 	public JFrame frame;
 	private JTextField title;
 	private JTextField firstname;
@@ -35,6 +37,10 @@ public class gui_swing  extends JFrame implements ActionListener {
 	private Statement s;
 	private PreparedStatement ps;
 	private ResultSet rs;
+	
+	public void setIdLibrary(int idLibrary) {
+		this.idLibrary = idLibrary;
+	}
 
 	/**
 	 * Launch the application.
@@ -243,37 +249,16 @@ public class gui_swing  extends JFrame implements ActionListener {
 			 book.setPages(valuePages);
 			 
 			 
-			 String selectedAuthor = authorBox.getSelectedItem().toString();
-			 String[] splitAuthor = selectedAuthor.split(" ");	 
-			 
-			 
 			 book.setLent(0);
 			 
 			 
-		     try 
-		     {
-		    	 String query = "SELECT id_authors FROM authors where id_authors = '" + splitAuthor[0] + "'";
-		    	 
-		    	 con = DriverManager.getConnection(this.conStr);
-		    	 
-		    	 s = con.createStatement();
-		    	 
-		    	 rs = s.executeQuery(query);
-		    	 
-		    	 while (rs.next())
-				 {
-		    		 int idAuthor = rs.getInt("id_authors");
-		    		 
-		    		 book.setIdAuthor(idAuthor);
-		    		 
-				 }
-		    	 
-		    	 con.close();
-		     } 
-		     catch (SQLException sqle) 
-		     {
-		    	 sqle.printStackTrace();
-		     }
+			 String selectedAuthor = authorBox.getSelectedItem().toString();
+			 String[] splitAuthor = selectedAuthor.split(" ");	 
+			 int idAuthor = Integer.parseInt(splitAuthor[0]);
+			 book.setIdAuthor(idAuthor);
+			 
+			 
+			 book.setIdLibrary(idLibrary);
 		     
 		     book.createBook(book);
 		 }

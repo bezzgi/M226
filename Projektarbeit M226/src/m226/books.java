@@ -14,6 +14,7 @@ public class books implements InterfaceBooks{
 	int pages;
 	int lent;
 	int idAuthor;
+	int idLibrary;
 	
 	private String conStr = "jdbc:mysql://localhost/library?user=root&password=";
 	private Connection con;
@@ -51,6 +52,12 @@ public class books implements InterfaceBooks{
 	}
 	public int getIdAuthor() {
 		return idAuthor;
+	}
+	public void setIdLibrary(int idLibrary) {
+		this.idLibrary = idLibrary;
+	}
+	public int getIdLibrary() {
+		return idLibrary;
 	}
 	
 	
@@ -103,12 +110,13 @@ public class books implements InterfaceBooks{
 			// get data connection and data statement
 			con = DriverManager.getConnection(this.conStr);
 			
-			String query = "insert into books (title, pages, lent, authors_id_authors) values (?,?,?,?)";
+			String query = "insert into books (title, pages, lent, authors_id_authors, library_id_library) values (?,?,?,?,?)";
 			ps = con.prepareStatement(query);
 			ps.setString(1, book.getTitle());
 			ps.setInt(2, book.getPages());
 			ps.setInt(3, book.getLent());
 			ps.setInt(4, book.getIdAuthor());
+			ps.setInt(5, book.getIdLibrary());
 			
 			ps.execute();
 			// close data statement and data connection
