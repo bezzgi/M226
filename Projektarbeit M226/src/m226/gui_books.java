@@ -199,8 +199,6 @@ public class gui_books extends JFrame implements ActionListener{
 	    	 
 	    	 rs = s.executeQuery(queryIdLibrary);
 	    	 
-	    	 DLMLent.removeAllElements();
-	    	 
 	    	 while (rs.next())
 			 {
 	    		 String name = rs.getString("name");

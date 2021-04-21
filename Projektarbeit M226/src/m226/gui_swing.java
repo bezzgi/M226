@@ -259,8 +259,15 @@ public class gui_swing  extends JFrame implements ActionListener {
 			 
 			 
 			 book.setIdLibrary(idLibrary);
-		     
-		     book.createBook(book);
+			 
+			 if(gui_swing.this.title.getText().equals("") || valuePages == 0)
+			 {
+				 
+			 }
+			 else
+			 {
+				 book.createBook(book);
+			 } 
 		 }
 		 
 		 if(e.getActionCommand().equals(deleteAuthorCommand))
