@@ -81,33 +81,38 @@ public class gui_swing  extends JFrame implements ActionListener {
 		frame.getContentPane().setLayout(null);
 		
 		JLabel lblNeuesBuch = new JLabel("Neues Buch");
-		lblNeuesBuch.setVerticalAlignment(SwingConstants.TOP);
-		lblNeuesBuch.setFont(new Font("Corbel Light", Font.PLAIN, 35));
+		lblNeuesBuch.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 35));
 		lblNeuesBuch.setBounds(20, 20, 360, 36);
 		frame.getContentPane().add(lblNeuesBuch);
 		
 		JLabel lblTitle = new JLabel("Titel\r\n");
-		lblTitle.setFont(new Font("Corbel Light", Font.PLAIN, 15));
+		lblTitle.setVerticalAlignment(SwingConstants.TOP);
+		lblTitle.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 15));
 		lblTitle.setBounds(20, 70, 376, 19);
 		frame.getContentPane().add(lblTitle);
 		
 		JLabel lblAuthor = new JLabel("Autor\r\n");
-		lblAuthor.setFont(new Font("Corbel Light", Font.PLAIN, 15));
+		lblAuthor.setVerticalAlignment(SwingConstants.TOP);
+		lblAuthor.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 15));
 		lblAuthor.setBounds(20, 139, 376, 19);
 		frame.getContentPane().add(lblAuthor);
+		authorBox.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 12));
 		
 		authorBox.setBounds(20, 159, 365, 28);
 		frame.getContentPane().add(authorBox);
 		
 		JLabel lblPages = new JLabel("Seiten");
-		lblPages.setFont(new Font("Corbel Light", Font.PLAIN, 15));
+		lblPages.setVerticalAlignment(SwingConstants.TOP);
+		lblPages.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 15));
 		lblPages.setBounds(20, 208, 376, 19);
 		frame.getContentPane().add(lblPages);
+		pages.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 12));
 		
 		pages.setBounds(20, 228, 365, 28);
 		frame.getContentPane().add(pages);
 		
 		JButton btnBook = new JButton("Buch hinzufügen");
+		btnBook.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 12));
 		btnBook.setBounds(20, 280, 150, 35);
 		btnBook.addActionListener(this);
 		frame.getContentPane().add(btnBook);
@@ -118,52 +123,58 @@ public class gui_swing  extends JFrame implements ActionListener {
 		
 		
 		JLabel lblNeuerAutor = new JLabel("Neuer Autor");
-		lblNeuerAutor.setVerticalAlignment(SwingConstants.TOP);
-		lblNeuerAutor.setFont(new Font("Corbel Light", Font.PLAIN, 35));
+		lblNeuerAutor.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 35));
 		lblNeuerAutor.setBounds(400, 20, 360, 36);
 		frame.getContentPane().add(lblNeuerAutor);
 		
 		title = new JTextField();
+		title.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 12));
 		title.setBounds(20, 90, 365, 28);
 		frame.getContentPane().add(title);
 		title.setColumns(10);
 		
 		JLabel lblFirstname = new JLabel("Vorname");
-		lblFirstname.setFont(new Font("Corbel Light", Font.PLAIN, 15));
+		lblFirstname.setVerticalAlignment(SwingConstants.TOP);
+		lblFirstname.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 15));
 		lblFirstname.setBounds(400, 70, 376, 19);
 		frame.getContentPane().add(lblFirstname);
 		
 		firstname = new JTextField();
+		firstname.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 12));
 		firstname.setColumns(10);
 		firstname.setBounds(400, 90, 365, 28);
 		frame.getContentPane().add(firstname);
 		
 		JLabel lblLastname = new JLabel("Nachname");
-		lblLastname.setFont(new Font("Corbel Light", Font.PLAIN, 15));
+		lblLastname.setVerticalAlignment(SwingConstants.TOP);
+		lblLastname.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 15));
 		lblLastname.setBounds(400, 139, 376, 19);
 		frame.getContentPane().add(lblLastname);
 		
 		lastname = new JTextField();
+		lastname.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 12));
 		lastname.setColumns(10);
 		lastname.setBounds(400, 159, 365, 28);
 		frame.getContentPane().add(lastname);
 		
 		JButton btnAuthor = new JButton("Author hinzufügen");
+		btnAuthor.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 12));
 		btnAuthor.setBounds(400, 280, 150, 35);
 		btnAuthor.addActionListener(this);
 		frame.getContentPane().add(btnAuthor);
 		btnAuthor.setActionCommand(authorCommand);
 		
 		JLabel lblAuthors = new JLabel("Autoren");
-		lblAuthors.setFont(new Font("Corbel Light", Font.PLAIN, 15));
+		lblAuthors.setVerticalAlignment(SwingConstants.TOP);
+		lblAuthors.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 15));
 		lblAuthors.setBounds(780, 70, 376, 19);
 		frame.getContentPane().add(lblAuthors);
 		
 		JLabel lblAutorLoeschen = new JLabel("Autor löschen");
-		lblAutorLoeschen.setVerticalAlignment(SwingConstants.TOP);
-		lblAutorLoeschen.setFont(new Font("Corbel Light", Font.PLAIN, 35));
+		lblAutorLoeschen.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 35));
 		lblAutorLoeschen.setBounds(780, 20, 360, 36);
 		frame.getContentPane().add(lblAutorLoeschen);
+		deleteAuthorBox.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 12));
 		
 		
 		
@@ -173,6 +184,7 @@ public class gui_swing  extends JFrame implements ActionListener {
 		frame.getContentPane().add(deleteAuthorBox);
 		
 		JButton btnDeleteAuthor = new JButton("Autor löschen");
+		btnDeleteAuthor.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 12));
 		btnDeleteAuthor.setBounds(780, 280, 150, 35);
 		btnDeleteAuthor.addActionListener(this);
 		frame.getContentPane().add(btnDeleteAuthor);
@@ -275,22 +287,13 @@ public class gui_swing  extends JFrame implements ActionListener {
 			 String selectedAuthor = deleteAuthorBox.getSelectedItem().toString();
 			 String[] splitAuthor = selectedAuthor.split(" ");	
 			 
-			 try 
-		     {
-		    	 String query = "DELETE FROM authors WHERE id_authors = '" + splitAuthor[0] + "'";
-		    	 
-		    	 con = DriverManager.getConnection(this.conStr);
-		    	 
-		    	 s = con.createStatement();
-		    	 
-		    	 s.executeUpdate(query);
-		    	 
-		    	 con.close();
-		     } 
-		     catch (SQLException sqle) 
-		     {
-		    	 sqle.printStackTrace();
-		     }
+			 authors author = new authors();
+			 
+			 int idAuthor = Integer.parseInt(splitAuthor[0]);
+			 
+			 author.setIdAuthors(idAuthor);
+			 
+			 author.deleteAuthor();
 			 
 			 loadAuthors();
 		 }

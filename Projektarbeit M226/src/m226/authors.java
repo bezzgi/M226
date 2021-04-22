@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 
@@ -19,6 +20,7 @@ public class authors {
 		}
 	}
 
+	int idAuthors;
 	String firstname;
 	String lastname;
 
@@ -28,6 +30,12 @@ public class authors {
 	private PreparedStatement ps;
 	private ResultSet rs;
 	
+	public void setIdAuthors(int idAuthors) {
+		this.idAuthors = idAuthors;
+	}
+	public int getIdAuthors() {
+		return idAuthors;
+	}
 	public void setFirstname(String firstname) {
 		this.firstname = firstname;
 	}
@@ -41,8 +49,8 @@ public class authors {
 		return lastname;
 	}
 	
-	public void createAuthor(authors author) {
-		
+	public void createAuthor(authors author) 
+	{	
 		try 
 		{
 			// get data connection and data statement
@@ -63,5 +71,25 @@ public class authors {
 			e.printStackTrace();
 			System.out.print(e.getMessage());
 		}
+	}
+	
+	public void deleteAuthor()
+	{
+		 try 
+	     {
+	    	 String query = "DELETE FROM authors WHERE id_authors = '" + idAuthors + "'";
+	    	 
+	    	 con = DriverManager.getConnection(this.conStr);
+	    	 
+	    	 s = con.createStatement();
+	    	 
+	    	 s.executeUpdate(query);
+	    	 
+	    	 con.close();
+	     } 
+	     catch (SQLException sqle) 
+	     {
+	    	 sqle.printStackTrace();
+	     }
 	}
 }

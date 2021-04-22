@@ -73,6 +73,7 @@ public class gui_books extends JFrame implements ActionListener{
 		frame.setBounds(100, 100, 500, 600);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		availableList.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 12));
 		
 		availableList.setBounds(20, 65, 445, 133);
 		availableList.setSelectionMode(DefaultListSelectionModel.SINGLE_SELECTION);
@@ -81,25 +82,29 @@ public class gui_books extends JFrame implements ActionListener{
 		
 		JLabel lblAvailableBooks = new JLabel("Verfügbare Bücher");
 		lblAvailableBooks.setVerticalAlignment(SwingConstants.TOP);
-		lblAvailableBooks.setFont(new Font("Corbel", Font.PLAIN, 35));
+		lblAvailableBooks.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 35));
 		lblAvailableBooks.setBounds(20, 22, 444, 43);
 		frame.getContentPane().add(lblAvailableBooks);
+        btnLend.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 12));
 		
 		
         btnLend.addActionListener(this);
         btnLend.setBounds(20, 220, 120, 30);
         btnLend.setActionCommand(lendBook);
         frame.getContentPane().add(btnLend);
+        btnDelete.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 12));
 
         btnDelete.addActionListener(this);
         btnDelete.setBounds(184, 220, 120, 30);
         btnDelete.setActionCommand(deleteBook);
         frame.getContentPane().add(btnDelete);
+        btnNew.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 12));
         
         btnNew.addActionListener(this);
         btnNew.setBounds(345, 220, 120, 30);
         btnNew.setActionCommand(newBook);
         frame.getContentPane().add(btnNew);
+        lentList.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 12));
         
         lentList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         lentList.setBounds(20, 335, 445, 133);
@@ -109,14 +114,16 @@ public class gui_books extends JFrame implements ActionListener{
         
         JLabel lblLentBooks = new JLabel("Ausgeliehene Bücher");
         lblLentBooks.setVerticalAlignment(SwingConstants.TOP);
-        lblLentBooks.setFont(new Font("Corbel", Font.PLAIN, 35));
+        lblLentBooks.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 35));
         lblLentBooks.setBounds(20, 292, 444, 43);
         frame.getContentPane().add(lblLentBooks);
+        btnGiveBack.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 12));
         
         btnGiveBack.addActionListener(this);
         btnGiveBack.setBounds(20, 490, 120, 30);
         btnGiveBack.setActionCommand(giveBack);
         frame.getContentPane().add(btnGiveBack);
+        btnReload.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 12));
         
         btnReload.addActionListener(this);
         btnReload.setBounds(345, 490, 120, 30);
@@ -126,14 +133,14 @@ public class gui_books extends JFrame implements ActionListener{
         
         lblLibrary.setHorizontalAlignment(SwingConstants.LEFT);
         lblLibrary.setVerticalAlignment(SwingConstants.TOP);
-        lblLibrary.setFont(new Font("Corbel", Font.PLAIN, 15));
+        lblLibrary.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 14));
         lblLibrary.setBounds(20, 530, 218, 19);
         frame.getContentPane().add(lblLibrary);
         
         
         lblLocation.setHorizontalAlignment(SwingConstants.RIGHT);
         lblLocation.setVerticalAlignment(SwingConstants.TOP);
-        lblLocation.setFont(new Font("Corbel", Font.PLAIN, 15));
+        lblLocation.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 14));
         lblLocation.setBounds(247, 530, 218, 19);
         frame.getContentPane().add(lblLocation);
 	}

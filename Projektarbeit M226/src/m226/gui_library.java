@@ -18,9 +18,11 @@ public class gui_library  extends JFrame implements ActionListener {
 	public JFrame frame;
 	private JTextField name;
 	JComboBox chooseLibrary = new JComboBox();
+	JComboBox deleteLibrary = new JComboBox();
 	
 	private String create = "create";
 	private String choose = "choose";
+	private String delete = "delete";
 	
 	private String conStr = "jdbc:mysql://localhost/library?user=root&password=";
 	private Connection con;
@@ -63,37 +65,39 @@ public class gui_library  extends JFrame implements ActionListener {
 		}
 		 
 		frame = new JFrame();
-		frame.setBounds(100, 100, 800, 300);
+		frame.setBounds(100, 100, 1100, 300);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		JLabel lblNewLibrary = new JLabel("Neue Bibliothek");
-		lblNewLibrary.setVerticalAlignment(SwingConstants.TOP);
-		lblNewLibrary.setFont(new Font("Corbel Light", Font.PLAIN, 35));
+		lblNewLibrary.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 35));
 		lblNewLibrary.setBounds(20, 20, 360, 36);
 		frame.getContentPane().add(lblNewLibrary);
 		
 		JLabel lblName = new JLabel("Name");
-		lblName.setFont(new Font("Corbel Light", Font.PLAIN, 15));
+		lblName.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 15));
 		lblName.setBounds(20, 70, 376, 19);
 		frame.getContentPane().add(lblName);
 		
 		name = new JTextField();
+		name.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 12));
 		name.setColumns(10);
 		name.setBounds(20, 90, 365, 28);
 		frame.getContentPane().add(name);
 		
 		JLabel lblLocation = new JLabel("Standort");
-		lblLocation.setFont(new Font("Corbel Light", Font.PLAIN, 15));
+		lblLocation.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 15));
 		lblLocation.setBounds(20, 140, 376, 19);
 		frame.getContentPane().add(lblLocation);
 		
 		location = new JTextField();
+		location.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 12));
 		location.setColumns(10);
 		location.setBounds(20, 160, 365, 28);
 		frame.getContentPane().add(location);
 		
 		JButton btnCreate = new JButton("Bibliothek erstellen");
+		btnCreate.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 12));
 		btnCreate.setBounds(20, 210, 150, 35);
 		btnCreate.addActionListener(this);
 		frame.getContentPane().add(btnCreate);
@@ -104,28 +108,48 @@ public class gui_library  extends JFrame implements ActionListener {
 		
 		
 		JLabel lblChooseLibrary = new JLabel("Bibliothek wählen");
-		lblChooseLibrary.setVerticalAlignment(SwingConstants.TOP);
-		lblChooseLibrary.setFont(new Font("Corbel Light", Font.PLAIN, 35));
+		lblChooseLibrary.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 35));
 		lblChooseLibrary.setBounds(400, 20, 360, 36);
 		frame.getContentPane().add(lblChooseLibrary);
 		
-		JLabel lblLibrary = new JLabel("Bibliothek");
-		lblLibrary.setFont(new Font("Corbel Light", Font.PLAIN, 15));
-		lblLibrary.setBounds(400, 70, 376, 19);
-		frame.getContentPane().add(lblLibrary);
+		JLabel lblLibrary1 = new JLabel("Bibliothek");
+		lblLibrary1.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 15));
+		lblLibrary1.setBounds(400, 70, 376, 19);
+		frame.getContentPane().add(lblLibrary1);
 		
+		chooseLibrary.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 12));
 		chooseLibrary.setBounds(400, 90, 365, 28);
 		frame.getContentPane().add(chooseLibrary);
 		
-		JButton btnChoose = new JButton("Bibliothek ausw\u00E4hlen");
+		JButton btnChoose = new JButton("Bibliothek auswählen");
+		btnChoose.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 12));
 		btnChoose.setBounds(400, 210, 150, 35);
 		btnChoose.addActionListener(this);
-		frame.getContentPane().add(btnChoose);
 		btnChoose.setActionCommand(choose);
+		frame.getContentPane().add(btnChoose);
+		
+		deleteLibrary.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 12));
+		deleteLibrary.setBounds(780, 90, 280, 28);
+		frame.getContentPane().add(deleteLibrary);
+		
+		JButton btnDelete = new JButton("Bibliothek löschen");
+		btnDelete.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 12));
+		btnDelete.addActionListener(this);
+		btnDelete.setBounds(780, 210, 150, 35);
+		btnDelete.setActionCommand(delete);
+		frame.getContentPane().add(btnDelete);
+		
+		JLabel lblDeleteLibrary = new JLabel("Bibliothek l\u00F6schen");
+		lblDeleteLibrary.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 35));
+		lblDeleteLibrary.setBounds(780, 20, 360, 36);
+		frame.getContentPane().add(lblDeleteLibrary);
+		
+		JLabel lblLibrary2 = new JLabel("Bibliothek");
+		lblLibrary2.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 15));
+		lblLibrary2.setBounds(780, 70, 376, 19);
+		frame.getContentPane().add(lblLibrary2);
 		
 		loadLibraries();
-		
-		String gay= lblLibrary.getText();
 	}
 	 
 	 public void loadLibraries()
@@ -141,6 +165,7 @@ public class gui_library  extends JFrame implements ActionListener {
 	    	 rs = s.executeQuery(query);
 	    	 
 	    	 chooseLibrary.removeAllItems();
+	    	 deleteLibrary.removeAllItems();
 	    	 
 	    	 while (rs.next())
 			 {
@@ -150,6 +175,7 @@ public class gui_library  extends JFrame implements ActionListener {
 	    		 String fullname = id_library + " | " + name + " | " + location;
 	    		 
 	    		 chooseLibrary.addItem(fullname);
+	    		 deleteLibrary.addItem(fullname);
 			 }
 	    	 
 	    	 con.close();
@@ -191,6 +217,22 @@ public class gui_library  extends JFrame implements ActionListener {
 			gui.loadBooks();
 			
 			this.frame.dispose();
+		}
+		
+		if(e.getActionCommand().equals(delete))
+		{
+			String selectedLibrary = deleteLibrary.getSelectedItem().toString();
+			String[] splitLibrary = selectedLibrary.split(" ");	
+			 
+			libraries library = new libraries();
+			 
+			int idLibrary = Integer.parseInt(splitLibrary[0]);
+			 
+			library.setIdLibrary(idLibrary);
+			 
+			library.deleteLibrary();
+			 
+			loadLibraries();
 		}
 	}
 }

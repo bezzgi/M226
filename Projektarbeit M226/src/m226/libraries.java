@@ -3,6 +3,7 @@ package m226;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 public class libraries {
@@ -60,5 +61,25 @@ public class libraries {
 			e.printStackTrace();
 			System.out.print(e.getMessage());
 		}
+	}
+	
+	public void deleteLibrary()
+	{
+		 try 
+	     {
+	    	 String query = "DELETE FROM library WHERE id_library = '" + idLibrary + "'";
+	    	 
+	    	 con = DriverManager.getConnection(this.conStr);
+	    	 
+	    	 s = con.createStatement();
+	    	 
+	    	 s.executeUpdate(query);
+	    	 
+	    	 con.close();
+	     } 
+	     catch (SQLException sqle) 
+	     {
+	    	 sqle.printStackTrace();
+	     }
 	}
 }
