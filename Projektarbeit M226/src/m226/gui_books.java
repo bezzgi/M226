@@ -12,7 +12,7 @@ import java.sql.Statement;
 
 import javax.swing.*;
 
-public class gui_books extends JFrame implements ActionListener{
+public class gui_books implements ActionListener{
 
 	private int idLibrary;
 	
@@ -295,7 +295,7 @@ public class gui_books extends JFrame implements ActionListener{
 		
 		if(e.getActionCommand().equals(newBook))
 		{
-			gui_swing start = new gui_swing();
+			gui_new start = new gui_new();
 			
 			start.frame.setVisible(true);
 			

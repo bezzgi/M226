@@ -13,7 +13,7 @@ import java.sql.Statement;
 
 import javax.swing.*;
 
-public class gui_swing  extends JFrame implements ActionListener {
+public class gui_new implements ActionListener {
 
 	private int idLibrary;
 	
@@ -49,7 +49,7 @@ public class gui_swing  extends JFrame implements ActionListener {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					gui_swing window = new gui_swing();
+					gui_new window = new gui_new();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -63,7 +63,7 @@ public class gui_swing  extends JFrame implements ActionListener {
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	 public gui_swing()
+	 public gui_new()
 	 {	
 		try 
 		{
@@ -236,10 +236,10 @@ public class gui_swing  extends JFrame implements ActionListener {
 		 if(e.getActionCommand().equals(authorCommand)) 
 		 {			
 			 authors author = new authors();
-			 author.setFirstname(gui_swing.this.firstname.getText());
-			 author.setLastname(gui_swing.this.lastname.getText());
+			 author.setFirstname(gui_new.this.firstname.getText());
+			 author.setLastname(gui_new.this.lastname.getText());
 			 
-			 if(gui_swing.this.firstname.getText().equals("") || gui_swing.this.lastname.getText().equals(""))
+			 if(gui_new.this.firstname.getText().equals("") || gui_new.this.lastname.getText().equals(""))
 			 {
 				 
 			 }
@@ -254,7 +254,7 @@ public class gui_swing  extends JFrame implements ActionListener {
 		 if(e.getActionCommand().equals(bookCommand)) 
 		 {			
 			 books book = new books();
-			 book.setTitle(gui_swing.this.title.getText());
+			 book.setTitle(gui_new.this.title.getText());
 			 
 			 
 			 int valuePages = (Integer) pages.getValue();
@@ -272,7 +272,7 @@ public class gui_swing  extends JFrame implements ActionListener {
 			 
 			 book.setIdLibrary(idLibrary);
 			 
-			 if(gui_swing.this.title.getText().equals("") || valuePages == 0)
+			 if(gui_new.this.title.getText().equals("") || valuePages == 0)
 			 {
 				 
 			 }
