@@ -107,7 +107,7 @@ public class gui_library implements ActionListener {
 		
 		
 		
-		JLabel lblChooseLibrary = new JLabel("Bibliothek wählen");
+		JLabel lblChooseLibrary = new JLabel("Bibliothek w\u00E4hlen");
 		lblChooseLibrary.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 35));
 		lblChooseLibrary.setBounds(400, 20, 360, 36);
 		frame.getContentPane().add(lblChooseLibrary);
@@ -121,7 +121,7 @@ public class gui_library implements ActionListener {
 		chooseLibrary.setBounds(400, 90, 365, 28);
 		frame.getContentPane().add(chooseLibrary);
 		
-		JButton btnChoose = new JButton("Bibliothek auswählen");
+		JButton btnChoose = new JButton("Bibliothek ausw\u00E4hlen");
 		btnChoose.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 12));
 		btnChoose.setBounds(400, 210, 150, 35);
 		btnChoose.addActionListener(this);
@@ -132,7 +132,7 @@ public class gui_library implements ActionListener {
 		deleteLibrary.setBounds(780, 90, 280, 28);
 		frame.getContentPane().add(deleteLibrary);
 		
-		JButton btnDelete = new JButton("Bibliothek löschen");
+		JButton btnDelete = new JButton("Bibliothek l\u00F6schen");
 		btnDelete.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 12));
 		btnDelete.addActionListener(this);
 		btnDelete.setBounds(780, 210, 150, 35);

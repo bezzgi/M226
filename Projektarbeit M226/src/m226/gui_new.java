@@ -24,9 +24,9 @@ public class gui_new implements ActionListener {
 	JSpinner pages = new JSpinner();
 	JComboBox authorBox = new JComboBox();
 	JComboBox deleteAuthorBox = new JComboBox();
-	JButton btnBook = new JButton("Buch hinzufügen");
-	JButton btnAuthor = new JButton("Author hinzufügen");
-	JButton btnDeleteAuthor = new JButton("Autor löschen");
+	JButton btnBook = new JButton("Buch hinzuf\u00FCgen");
+	JButton btnAuthor = new JButton("Author hinzuf\u00FCgen");
+	JButton btnDeleteAuthor = new JButton("Autor l\u00F6schen");
 	
 	private String authorCommand = "author";
 	private String bookCommand = "book";
@@ -111,7 +111,7 @@ public class gui_new implements ActionListener {
 		pages.setBounds(20, 228, 365, 28);
 		frame.getContentPane().add(pages);
 		
-		JButton btnBook = new JButton("Buch hinzufügen");
+		JButton btnBook = new JButton("Buch hinzuf\u00FCgen");
 		btnBook.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 12));
 		btnBook.setBounds(20, 280, 150, 35);
 		btnBook.addActionListener(this);
@@ -157,7 +157,7 @@ public class gui_new implements ActionListener {
 		lastname.setBounds(400, 159, 365, 28);
 		frame.getContentPane().add(lastname);
 		
-		JButton btnAuthor = new JButton("Author hinzufügen");
+		JButton btnAuthor = new JButton("Author hinzuf\u00FCgen");
 		btnAuthor.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 12));
 		btnAuthor.setBounds(400, 280, 150, 35);
 		btnAuthor.addActionListener(this);
@@ -170,7 +170,7 @@ public class gui_new implements ActionListener {
 		lblAuthors.setBounds(780, 70, 376, 19);
 		frame.getContentPane().add(lblAuthors);
 		
-		JLabel lblAutorLoeschen = new JLabel("Autor löschen");
+		JLabel lblAutorLoeschen = new JLabel("Autor l\u00F6schen");
 		lblAutorLoeschen.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 35));
 		lblAutorLoeschen.setBounds(780, 20, 360, 36);
 		frame.getContentPane().add(lblAutorLoeschen);
@@ -183,7 +183,7 @@ public class gui_new implements ActionListener {
 		deleteAuthorBox.setBounds(780, 90, 280, 28);
 		frame.getContentPane().add(deleteAuthorBox);
 		
-		JButton btnDeleteAuthor = new JButton("Autor löschen");
+		JButton btnDeleteAuthor = new JButton("Autor l\u00F6schen");
 		btnDeleteAuthor.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 12));
 		btnDeleteAuthor.setBounds(780, 280, 150, 35);
 		btnDeleteAuthor.addActionListener(this);

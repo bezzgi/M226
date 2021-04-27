@@ -18,9 +18,9 @@ public class gui_books implements ActionListener{
 	
 	public JFrame frame;
 	JButton btnLend = new JButton("Ausleihen");
-	JButton btnDelete = new JButton("Löschen");
+	JButton btnDelete = new JButton("L\u00F6schen");
 	JButton btnNew = new JButton("Neu");
-	JButton btnGiveBack = new JButton("Zurückgeben");
+	JButton btnGiveBack = new JButton("Zur\u00FCckgeben");
 	JButton btnReload = new JButton("Neu laden");
 	JList availableList = new JList();
 	JList lentList = new JList();
@@ -80,7 +80,7 @@ public class gui_books implements ActionListener{
 		frame.getContentPane().add(availableList);
 		
 		
-		JLabel lblAvailableBooks = new JLabel("Verfügbare Bücher");
+		JLabel lblAvailableBooks = new JLabel("Verf\u00FCgbare B\u00FCcher");
 		lblAvailableBooks.setVerticalAlignment(SwingConstants.TOP);
 		lblAvailableBooks.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 35));
 		lblAvailableBooks.setBounds(20, 22, 444, 43);
@@ -112,7 +112,7 @@ public class gui_books implements ActionListener{
         
         
         
-        JLabel lblLentBooks = new JLabel("Ausgeliehene Bücher");
+        JLabel lblLentBooks = new JLabel("Ausgeliehene B\u00FCcher");
         lblLentBooks.setVerticalAlignment(SwingConstants.TOP);
         lblLentBooks.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 35));
         lblLentBooks.setBounds(20, 292, 444, 43);
