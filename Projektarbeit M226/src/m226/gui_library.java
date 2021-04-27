@@ -3,26 +3,25 @@ package m226;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-
+import java.sql.*;
 import javax.swing.*;
 
 public class gui_library implements ActionListener {
+	
+	//Swing objekte
 
 	public JFrame frame;
 	private JTextField name;
 	JComboBox chooseLibrary = new JComboBox();
 	JComboBox deleteLibrary = new JComboBox();
 	
+	//Actions
+	
 	private String create = "create";
 	private String choose = "choose";
 	private String delete = "delete";
+	
+	//Datenbank
 	
 	private String conStr = "jdbc:mysql://localhost/library?user=root&password=";
 	private Connection con;
@@ -152,6 +151,7 @@ public class gui_library implements ActionListener {
 		loadLibraries();
 	}
 	 
+	 //Methode welche die Bibliotheken Comboboxen löscht und neu lädt
 	 public void loadLibraries()
 	 { 
 	     try 
@@ -166,6 +166,8 @@ public class gui_library implements ActionListener {
 	    	 
 	    	 chooseLibrary.removeAllItems();
 	    	 deleteLibrary.removeAllItems();
+	    	 
+	    	 //Falls es Bibliotheken gibt, werden sie zur Combobox hinzugefügt
 	    	 
 	    	 while (rs.next())
 			 {
@@ -189,6 +191,7 @@ public class gui_library implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) 
 	{	
+		//Die Bibliothek wird erstellt
 		if(e.getActionCommand().equals(create))
 		{
 			
@@ -198,15 +201,19 @@ public class gui_library implements ActionListener {
 			
 			library.createLibrary(library);
 			
+			//Lädt die Bibliotheken neu nach dem Erstellen
 			loadLibraries();
 		}
 		 
+		//Wählt die Bibliotheke aus und öffnet das Bücher GUI
 		if(e.getActionCommand().equals(choose))
 		{
 			String selectedLibrary = chooseLibrary.getSelectedItem().toString();
 			String[] splitLibrary = selectedLibrary.split(" ");
 			
 			int idLibrary = Integer.parseInt(splitLibrary[0]);
+			
+			//Lädt alle Bücher und schliesst danach das Bibliotheken fenster
 			
 			gui_books gui = new gui_books();
 			
@@ -218,6 +225,8 @@ public class gui_library implements ActionListener {
 			
 			this.frame.dispose();
 		}
+		
+		//Löscht eine Bibliothek
 		
 		if(e.getActionCommand().equals(delete))
 		{

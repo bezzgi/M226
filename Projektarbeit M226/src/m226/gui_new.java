@@ -3,19 +3,14 @@ package m226;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-
+import java.sql.*;
 import javax.swing.*;
 
 public class gui_new implements ActionListener {
 
 	private int idLibrary;
+	
+	//Erstellen der Swing Objekte
 	
 	public JFrame frame;
 	private JTextField title;
@@ -28,9 +23,13 @@ public class gui_new implements ActionListener {
 	JButton btnAuthor = new JButton("Author hinzuf\u00FCgen");
 	JButton btnDeleteAuthor = new JButton("Autor l\u00F6schen");
 	
+	//Actions
+	
 	private String authorCommand = "author";
 	private String bookCommand = "book";
 	private String deleteAuthorCommand = "deleteAuthor";
+	
+	//Datenbankverbindung
 	
 	private String conStr = "jdbc:mysql://localhost/library?user=root&password=";
 	private Connection con;
@@ -60,9 +59,8 @@ public class gui_new implements ActionListener {
 
 
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
+	//Konstruktor des GUIs
+	
 	 public gui_new()
 	 {	
 		try 
@@ -191,9 +189,11 @@ public class gui_new implements ActionListener {
 		btnDeleteAuthor.setActionCommand(deleteAuthorCommand);
 		
 		
-		
+		//Lädt die Autoren
 		loadAuthors();
 	 }
+	 
+	 //Methode welche die Autoren lädt und die Liste bereinigt.
 	 
 	 public void loadAuthors()
 	 { 
@@ -210,6 +210,8 @@ public class gui_new implements ActionListener {
 	    	 authorBox.removeAllItems();
 	    	 deleteAuthorBox.removeAllItems();
 	    	 
+	    	 //Falls ein Autor existiert, wird er in die Combobox eingefügt
+	    	 
 	    	 while (rs.next())
 			 {
 	    		 int id_authors = rs.getInt("id_authors");
@@ -224,20 +226,29 @@ public class gui_new implements ActionListener {
 	    	 
 	    	 con.close();
 	     } 
+	     
+	     // Fehlerbehandlung
+	     
 	     catch (SQLException sqle) 
 	     {
 	    	 sqle.printStackTrace();
 	     }
 	 }
 
+	 
+	 //Action Event Listener
 	 @Override
 	 public void actionPerformed(ActionEvent e) 
 	 {	
+		 //Autor erstellen
+		 
 		 if(e.getActionCommand().equals(authorCommand)) 
 		 {			
 			 authors author = new authors();
 			 author.setFirstname(gui_new.this.firstname.getText());
 			 author.setLastname(gui_new.this.lastname.getText());
+			 
+			//Falls die Eingabe korrekt ist, wird sie weitergeleitet und ein neuer Autor erstellt
 			 
 			 if(gui_new.this.firstname.getText().equals("") || gui_new.this.lastname.getText().equals(""))
 			 {
@@ -250,6 +261,7 @@ public class gui_new implements ActionListener {
 			 } 
 		 }	
 		
+		//Buch erstellen
 		
 		 if(e.getActionCommand().equals(bookCommand)) 
 		 {			
@@ -260,17 +272,17 @@ public class gui_new implements ActionListener {
 			 int valuePages = (Integer) pages.getValue();
 			 book.setPages(valuePages);
 			 
-			 
+			 //Das Buch ist am Anfang noch nicht ausgeliehen
 			 book.setLent(0);
 			 
-			 
+			 //Nimmt die Eingabe und schneidet alles ausser die ID weg
 			 String selectedAuthor = authorBox.getSelectedItem().toString();
 			 String[] splitAuthor = selectedAuthor.split(" ");	 
 			 int idAuthor = Integer.parseInt(splitAuthor[0]);
 			 book.setIdAuthor(idAuthor);
-			 
-			 
 			 book.setIdLibrary(idLibrary);
+			 
+			//Falls die Eingabe korrekt ist, wird sie weitergeleitet und ein neues Buch wird erstellt
 			 
 			 if(gui_new.this.title.getText().equals("") || valuePages == 0)
 			 {
@@ -282,8 +294,12 @@ public class gui_new implements ActionListener {
 			 } 
 		 }
 		 
+		 //Autor löschen
+		 
 		 if(e.getActionCommand().equals(deleteAuthorCommand))
 		 {
+			 //Nimmt die ID des Autors, löscht sie mit der Methode und reloaded die Combobox
+			 
 			 String selectedAuthor = deleteAuthorBox.getSelectedItem().toString();
 			 String[] splitAuthor = selectedAuthor.split(" ");	
 			 

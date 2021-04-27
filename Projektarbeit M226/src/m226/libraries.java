@@ -12,10 +12,14 @@ public class libraries {
 	String name;
 	String location;
 
+	//Datenbankverbindung
+	
 	private String conStr = "jdbc:mysql://localhost/library?user=root&password=";
 	private Connection con;
 	private Statement s;
 	private PreparedStatement ps;
+	
+	//Getter und Setter
 
 	public void setIdLibrary(int idLibrary) {
 		this.idLibrary = idLibrary;
@@ -37,6 +41,7 @@ public class libraries {
 	}
 
 	
+	//Methode zum Erstellen der Bibliothek
 
 	public void createLibrary(libraries library) {
 		
@@ -56,12 +61,17 @@ public class libraries {
 			ps.close();
 			con.close();
 		}
+		
+		//Fehlerbehandlung
+		
 		catch (Exception e) 
 		{
 			e.printStackTrace();
 			System.out.print(e.getMessage());
 		}
 	}
+	
+	//Methode zum Erstellen der Bibliotheke
 	
 	public void deleteLibrary()
 	{
@@ -77,6 +87,9 @@ public class libraries {
 	    	 
 	    	 con.close();
 	     } 
+		 
+		//Fehlerbehandlung
+		 
 	     catch (SQLException sqle) 
 	     {
 	    	 sqle.printStackTrace();

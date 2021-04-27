@@ -22,7 +22,7 @@ public class books implements InterfaceBooks{
 	private PreparedStatement ps;
 	
 	
-	//Setter und Getter f�r alle Variablen
+	//Getter und Setter
 	public void setIdBook(int id_books) {
 		this.idBook = id_books;
 	}
@@ -62,11 +62,13 @@ public class books implements InterfaceBooks{
 	
 	
 	
-	
+	//Methode um Bücher auszuleihen
 	public void lend() 
 	{
 		try 
 	    {
+			//Setzt den wert lent auf 1, sodass das Buch als ausgeliehen angezeigt wird
+			
 			String query = "UPDATE books SET lent = 1 WHERE id_books = '" + idBook + "'";
 	    	 
 	    	con = DriverManager.getConnection(this.conStr);
@@ -83,10 +85,13 @@ public class books implements InterfaceBooks{
 	    }
 	}
 	
+	//Methode um Bücher zurückzugeben
 	public void giveBack() 
 	{
 		try 
 	    {
+			//Setzt den wert lent auf 0, sodass das Buch zurückgegeben wird
+			
 			String query = "UPDATE books SET lent = 0 WHERE id_books = '" + idBook + "'";
 	    	 
 	    	con = DriverManager.getConnection(this.conStr);
@@ -102,7 +107,9 @@ public class books implements InterfaceBooks{
 	    	
 	    }
 	}
-
+	
+	
+	//Methode zum erstellen eines Buchs
 	public void createBook(books book) {
 		
 		try 
@@ -131,7 +138,7 @@ public class books implements InterfaceBooks{
 	}
 	
 	
-	
+	//Methode zum löschen eines Buches
 	public void deleteBook() 
 	{
 		try 

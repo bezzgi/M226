@@ -1,20 +1,18 @@
 package m226;
 
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-
+import java.sql.*;
 import javax.swing.*;
+import java.awt.*;
+
+//Bücher GUI
 
 public class gui_books implements ActionListener{
 
 	private int idLibrary;
+	
+	//Swing Objekte
 	
 	public JFrame frame;
 	JButton btnLend = new JButton("Ausleihen");
@@ -29,11 +27,15 @@ public class gui_books implements ActionListener{
 	JLabel lblLibrary = new JLabel("Bibliothek: ");
 	JLabel lblLocation = new JLabel("Standort: ");
 	
+	//Actions
+	
 	private String deleteBook = "deleteBook";
 	private String lendBook = "lendBook";
 	private String giveBack = "giveBack";
 	private String newBook = "newBook";
 	private String reload = "reload";
+	
+	//Datenbank
 	
 	private String conStr = "jdbc:mysql://localhost/library?user=root&password=";
 	private Connection con;
@@ -63,11 +65,11 @@ public class gui_books implements ActionListener{
 		});
 	}
 
-	/**
-	 * Create the application.
-	 */
+	
+	//Konstruktor des GUIs
 	
 	public gui_books() {
+		
 		
 		frame = new JFrame();
 		frame.setBounds(100, 100, 500, 600);
@@ -145,6 +147,7 @@ public class gui_books implements ActionListener{
         frame.getContentPane().add(lblLocation);
 	}
 	
+	//Methode welche die Bücherliste löscht und sie neu lädt
 	public void loadBooks()
 	{	
 		try 
@@ -159,6 +162,8 @@ public class gui_books implements ActionListener{
 	    	 
 	    	 DLMAvailable.removeAllElements();
 	    	 
+	    	 //Falls Bücher existieren, werden sie in die Combobox geschrieben
+	    	 
 	    	 while (rs.next())
 			 {
 	    		 int id_books = rs.getInt("id_books");
@@ -171,7 +176,7 @@ public class gui_books implements ActionListener{
 	    		 availableList.setModel(DLMAvailable);
 			 }
 	    	 
-	    	 
+	    	 //Derselbe Code, einfach für die andere Combobox
 	    	 
 	    	 String queryLent = "SELECT * FROM books as b left join authors as s on s.id_authors = b.authors_id_authors where b.lent = 1 and b.library_id_library = " + idLibrary + " order by title";
 	    	 
@@ -226,10 +231,14 @@ public class gui_books implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
+		
+		//Löscht das Buch
 		if(e.getActionCommand().equals(deleteBook))
 		{
 			try
 			{
+				
+				//Nimmt die ID und löst eine Methode aus
 				String listValue = availableList.getSelectedValue().toString();
 				
 				String[] splitList  = listValue.split(" ");
@@ -248,10 +257,12 @@ public class gui_books implements ActionListener{
 			}
 		}
 		
+		//Leiht das Buch aus mit der lend Methode
 		if(e.getActionCommand().equals(lendBook))
 		{
 			try
 			{
+				//Nimmt die ID und löst eine Methode aus
 				String listValue = availableList.getSelectedValue().toString();
 				
 				String[] splitList  = listValue.split(" ");
@@ -270,10 +281,12 @@ public class gui_books implements ActionListener{
 			}
 		}
 		
+		//Gibt das Buch zurück mit der giveBack Methode
 		if(e.getActionCommand().equals(giveBack))
 		{
 			try 
 			{
+				//Nimmt die ID und löst eine Methode aus
 				String listValue = lentList.getSelectedValue().toString();
 				
 				String[] splitList  = listValue.split(" ");
@@ -292,7 +305,7 @@ public class gui_books implements ActionListener{
 			}
 		}
 		
-		
+		//Öffnet das New GUI
 		if(e.getActionCommand().equals(newBook))
 		{
 			gui_new start = new gui_new();

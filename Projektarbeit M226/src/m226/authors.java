@@ -23,12 +23,16 @@ public class authors {
 	int idAuthors;
 	String firstname;
 	String lastname;
+	
+	//Datenbank
 
 	private String conStr = "jdbc:mysql://localhost/library?user=root&password=";
 	private Connection con;
 	private Statement s;
 	private PreparedStatement ps;
 	private ResultSet rs;
+	
+	//Getter und Setter
 	
 	public void setIdAuthors(int idAuthors) {
 		this.idAuthors = idAuthors;
@@ -49,6 +53,8 @@ public class authors {
 		return lastname;
 	}
 	
+	//Erstellt einen Autor
+	
 	public void createAuthor(authors author) 
 	{	
 		try 
@@ -66,12 +72,17 @@ public class authors {
 			ps.close();
 			con.close();
 		} 
+		
+		//Fehlerbehandlung
+		
 		catch (Exception e) 
 		{
 			e.printStackTrace();
 			System.out.print(e.getMessage());
 		}
 	}
+	
+	//Löscht einen Autor
 	
 	public void deleteAuthor()
 	{
@@ -87,6 +98,9 @@ public class authors {
 	    	 
 	    	 con.close();
 	     } 
+		 
+		 //Fehlerbehandlung
+		 
 	     catch (SQLException sqle) 
 	     {
 	    	 sqle.printStackTrace();
