@@ -20,7 +20,7 @@ public class gui_new implements ActionListener {
 	JComboBox authorBox = new JComboBox();
 	JComboBox deleteAuthorBox = new JComboBox();
 	JButton btnBook = new JButton("Buch hinzuf\u00FCgen");
-	JButton btnAuthor = new JButton("Author hinzuf\u00FCgen");
+	JButton btnAuthor = new JButton("Autor hinzuf\u00FCgen");
 	JButton btnDeleteAuthor = new JButton("Autor l\u00F6schen");
 	
 	//Actions
@@ -155,7 +155,7 @@ public class gui_new implements ActionListener {
 		lastname.setBounds(400, 159, 365, 28);
 		frame.getContentPane().add(lastname);
 		
-		JButton btnAuthor = new JButton("Author hinzuf\u00FCgen");
+		JButton btnAuthor = new JButton("Autor hinzuf\u00FCgen");
 		btnAuthor.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 12));
 		btnAuthor.setBounds(400, 280, 150, 35);
 		btnAuthor.addActionListener(this);

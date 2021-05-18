@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.4" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <class id="1" language="java" name="m226.authors" project="Projektarbeit M226" 
+    file="/Projektarbeit M226/src/m226/authors.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="421" y="192"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="m226.books" project="Projektarbeit M226" 
+    file="/Projektarbeit M226/src/m226/books.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="248" y="282"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="m226.gui_books" project="Projektarbeit M226" 
+    file="/Projektarbeit M226/src/m226/gui_books.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="871" y="292"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="m226.gui_library" project="Projektarbeit M226" 
+    file="/Projektarbeit M226/src/m226/gui_library.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1098" y="193"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="m226.gui_new" project="Projektarbeit M226" 
+    file="/Projektarbeit M226/src/m226/gui_new.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1325" y="256"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="6" language="java" name="m226.InterfaceBooks" project="Projektarbeit M226" 
+    file="/Projektarbeit M226/src/m226/InterfaceBooks.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="83" y="75"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="7" language="java" name="m226.libraries" project="Projektarbeit M226" 
+    file="/Projektarbeit M226/src/m226/libraries.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="604" y="183"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="m226.startApplication" project="Projektarbeit M226" 
+    file="/Projektarbeit M226/src/m226/startApplication.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="82" y="256"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <realization id="9">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="6"/>  
+  </realization>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>
